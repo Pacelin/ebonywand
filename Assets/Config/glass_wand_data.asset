@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee25a3b25ca23504c8fffb3d3a3ed44a, type: 3}
   m_Name: glass_wand_data
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 21300000, guid: b668cd73b0ac4ba4db9f21a167c80e6b, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: d6181911d76fff445892c22108caf5ba, type: 3}
   <PowerCapacity>k__BackingField: 100
   <PowerBurstMinimum>k__BackingField: 70
-  <PowerConsumption>k__BackingField: 1
-  <PowerProduce>k__BackingField: 3
+  <PowerConsumption>k__BackingField: 6
+  <PowerProduce>k__BackingField: 0.5
   <PowerType>k__BackingField: 0
