@@ -13,19 +13,18 @@ public class Wand
 
 	public Wand(WandData data) => Data = data;
 
+	public void ProducePower(float distance) =>
+		SetPower(Power + Data.PowerProduce * distance);
     public void ConsumpPower(float deltaTime) =>
         SetPower(Power - Data.PowerConsumption * deltaTime);
 
-	public void ProducePower(float distance) =>
-		SetPower(Power + Data.PowerProduce * distance);
 
     public void Burst()
     {
-        if (Power >= Data.PowerBurstMinimum)
-        {
-            SetPower(0);
-			OnBurst?.Invoke();
-		}
+        if (Power < Data.PowerBurstMinimum) return;
+        
+        SetPower(0);
+		OnBurst?.Invoke();
     }
 
     private void SetPower(float power)
