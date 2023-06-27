@@ -3,55 +3,51 @@ using UnityEngine;
 
 public class Wand
 {
-    public event Action OnBurst;
-    public event Action OnCanBurst;
-    public event Action OnCannotBurst;
     public event Action<float> OnPowerPercentChanged;
+    public event Action<bool> OnBurstableChanged;
+    public event Action OnBurst;
 
-    public WandData Data => _data;
-    public float Power => _power;
-    public float PowerPercent => _power / _data.PowerCapacity;
+    [field: SerializeField] public WandData Data { get; private set; }
+    public float Power { get; private set; }
+	public bool Burstable { get; private set; }
 
-	private WandData _data;
-    private float _power;
-    private bool _canBurst;
+	public Wand(WandData data) => Data = data;
 
-    public Wand(WandData data)
-    {
-        _data = data;
-        _power = 0;
-    }
+    public void ConsumpPower(float deltaTime) =>
+        SetPower(Power - Data.PowerConsumption * deltaTime);
 
-    public void ProducePower(float multiplier)
-    {
-        _power = Mathf.Min(_data.PowerCapacity, _power + _data.PowerProduce * multiplier);
-
-        OnPowerPercentChanged?.Invoke(PowerPercent);
-
-        if (_canBurst || _power < _data.PowerBurstMinimum) return;
-
-		_canBurst = true;
-		OnCanBurst?.Invoke();
-	}
-
-    public void ConsumpPower(float multiplier)
-    {
-        _power = Mathf.Max(0, _power - _data.PowerConsumption * multiplier);
-		
-        OnPowerPercentChanged?.Invoke(PowerPercent);
-
-        if (!_canBurst || _power >= _data.PowerBurstMinimum) return;
-
-        _canBurst = false;
-        OnCannotBurst?.Invoke();
-	}
+	public void ProducePower(float distance) =>
+		SetPower(Power + Data.PowerProduce * distance);
 
     public void Burst()
     {
-        if (_power >= _data.PowerBurstMinimum)
+        if (Power >= Data.PowerBurstMinimum)
         {
-            _power = 0;
-            OnBurst?.Invoke();
-        }
+            SetPower(0);
+			OnBurst?.Invoke();
+		}
     }
+
+    private void SetPower(float power)
+    {
+		Power = Mathf.Clamp(power, 0, Data.PowerCapacity);
+		OnPowerPercentChanged?.Invoke(Power / Data.PowerCapacity);
+
+        if (Burstable)
+        {
+            if (Power < Data.PowerBurstMinimum)
+            {
+                Burstable = false;
+                OnBurstableChanged?.Invoke(false);
+            }
+        }
+        else
+        {
+            if (Power >= Data.PowerBurstMinimum)
+            {
+                Burstable = true;
+                OnBurstableChanged?.Invoke(true);
+            }
+        }
+	}
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   <PowerCapacity>k__BackingField: 100
   <PowerBurstMinimum>k__BackingField: 70
   <PowerConsumption>k__BackingField: 6
-  <PowerProduce>k__BackingField: 0.5
+  <PowerProduce>k__BackingField: 0.75
   <PowerType>k__BackingField: 1

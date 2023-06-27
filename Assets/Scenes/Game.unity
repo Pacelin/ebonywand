@@ -599,8 +599,7 @@ MonoBehaviour:
   _ebonyWandData: {fileID: 11400000, guid: d1eeada28f353f941b127e068f1f51b2, type: 2}
   _glassWandData: {fileID: 11400000, guid: 2a98277e0ff1dc642b940b9cdda623b3, type: 2}
   _wandPresenter: {fileID: 1854560350}
-  _wandSwitcher: {fileID: 1058397896}
-  _wandCursor: {fileID: 1854560349}
+  _wandActivator: {fileID: 1854560349}
 --- !u!1 &1035947712
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,52 +684,6 @@ Transform:
   m_Father: {fileID: 1854560348}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1058397894
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1058397895}
-  - component: {fileID: 1058397896}
-  m_Layer: 0
-  m_Name: Switcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1058397895
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058397894}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1854560348}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1058397896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058397894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f162b3d87384fc4d833d87e23529120, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _switchKey: 113
-  _canSwitch: 1
 --- !u!1 &1080213181
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +737,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262463525}
-  - component: {fileID: 1262463528}
   - component: {fileID: 1262463527}
   - component: {fileID: 1262463526}
   m_Layer: 5
@@ -852,18 +804,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262463524}
   m_CullTransparentMesh: 1
---- !u!114 &1262463528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262463524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac828743611502498531b09199c2242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1439123651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1053,8 @@ GameObject:
   - component: {fileID: 1854560348}
   - component: {fileID: 1854560350}
   - component: {fileID: 1854560349}
+  - component: {fileID: 1854560352}
+  - component: {fileID: 1854560351}
   - component: {fileID: 1854560347}
   m_Layer: 0
   m_Name: Wand
@@ -1146,7 +1088,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1035947714}
-  - {fileID: 1058397895}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -1162,8 +1103,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5338aab0e953444a975b5364b671b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activateKeyCode: 323
   _defaultRotation: {x: 0, y: 0, z: -90}
   _activeRotation: {x: 0, y: 0, z: -60}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1854560350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,6 +1124,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9771f5d390e4b19489b8e88d27f16b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _burstKeyCode: 324
   _wandRenderer: {fileID: 1035947713}
-  _wandCursor: {fileID: 1854560349}
+  OnWandPowerPercentChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1262463526}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+        m_MethodName: set_fillAmount
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnWandBurstableChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWandBurst:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1854560351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854560346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f162b3d87384fc4d833d87e23529120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _switchKey: 113
+--- !u!114 &1854560352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854560346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b786f69c6db5964fa3be2e8a701ff55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _burstKeyCode: 324

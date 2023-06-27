@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class WandActivator : MonoBehaviour
 {
 	public bool IsActive { get; private set; }
 	
+	[Header("Input")]
+	[SerializeField] private KeyCode _activateKeyCode = KeyCode.Mouse0;
+
+	[Header("Settings")]
 	[SerializeField] private Vector3 _defaultRotation;
 	[SerializeField] private Vector3 _activeRotation;
+
+	[Header("Events")]
+	public UnityEvent OnActivate = new UnityEvent();
+	public UnityEvent OnDeactivate = new UnityEvent();
 
 	private void Awake()
 	{
@@ -16,16 +24,17 @@ public class WandActivator : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
-		{
+        if (Input.GetKeyDown(_activateKeyCode))
+        {
 			transform.rotation = Quaternion.Euler(_activeRotation);
 			IsActive = true;
-		}
-
-		else if (Input.GetMouseButtonUp((int) MouseButton.LeftMouse))
+			OnActivate.Invoke();
+        }
+		else if (Input.GetKeyUp(_activateKeyCode))
 		{
 			transform.rotation = Quaternion.Euler(_defaultRotation);
 			IsActive = false;
+			OnDeactivate.Invoke();
 		}
 	}
 }

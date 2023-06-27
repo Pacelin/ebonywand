@@ -5,6 +5,6 @@ public class CameraInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.BindInstance(Camera.main).AsSingle();
+        Container.BindInstance(Camera.main).AsSingle().NonLazy();
     }
 }

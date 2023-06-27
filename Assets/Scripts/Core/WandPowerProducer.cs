@@ -4,7 +4,7 @@ using Zenject;
 [RequireComponent(typeof(Collider2D))]
 public class WandPowerProducer : MonoBehaviour
 {
-	[Inject] private WandActivator _cursor;
+	[Inject] private WandActivator _activator;
 	[Inject] private WandPresenter _presenter;
 
 	private Vector3 _previousPosition;
@@ -17,10 +17,10 @@ public class WandPowerProducer : MonoBehaviour
 	private void OnMouseOver()
 	{
 		var currentPosition = _presenter.transform.position;
-		if (_cursor.IsActive)
+		if (_activator.IsActive)
 		{
 			var distance = Vector3.Distance(currentPosition, _previousPosition);
-			_presenter.Wand.ProducePower(distance);
+			_presenter.ActiveWand.ProducePower(distance);
 		}
 		_previousPosition = currentPosition;
 	}
