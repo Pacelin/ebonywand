@@ -1,5 +1,7 @@
 ﻿public enum PowerType
 {
+	No,
 	Plus,
-	Minus
+	Minus,
+	Both
 }
