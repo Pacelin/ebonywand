@@ -35,10 +35,10 @@ public class MagneticObject : ChargableObject
 
             var vector = (Vector2) (magnet.transform.position - transform.position);
 			var distance = vector.magnitude;
-			if (magnet._magnetDistance < distance) continue;
+			if (magnet._magnetDistance <= distance) continue;
 
 			var normalized = vector.normalized;
-			var force = normalized * _magnetPowerCurve.Evaluate(distance / magnet._magnetDistance);
+			var force = normalized * GetPower(distance, magnet, this);
 
 			if (Power == magnet.Power)
 				magnetPower -= force;
@@ -53,6 +53,17 @@ public class MagneticObject : ChargableObject
 
 		_rigidbody.AddForce(magnetPower - _rigidbody.velocity);
 		//_rigidbody.velocity = Vector2.Lerp(_rigidbody.velocity, velocity, _lerpStep);
+	}
+
+	private float GetPower(float distance, MagneticObject first, MagneticObject second)
+	{
+		float result = 0;
+		if (distance <= first._magnetDistance)
+			result += first._magnetPowerCurve.Evaluate(distance / first._magnetDistance);
+		if (distance <= second._magnetDistance)
+			result += second._magnetPowerCurve.Evaluate(distance / second._magnetDistance);
+
+		return result;
 	}
 
 	protected override void SetMinus() { }

@@ -2,29 +2,15 @@
 
 public class ChargeEffects : MonoBehaviour
 {
-	private PowerType _currentChargeEffects = PowerType.No;
+	[SerializeField] private GameObject _plusEffects;
+	[SerializeField] private GameObject _minusEffects;
 
-	public void SetEffects(PowerType powerType)
+	public void SetEffects(PowerType powerType) =>
+		SetEffects(powerType == PowerType.Plus, powerType == PowerType.Minus);
+
+	private void SetEffects(bool plus, bool minus)
 	{
-		if (powerType == _currentChargeEffects) return;
-
-		if (powerType == PowerType.No) DisableEffects();
-		else if (powerType == PowerType.Plus) EnablePlus();
-		else if (powerType == PowerType.Minus) EnableMinus();
-	}
-
-	private void DisableEffects()
-	{
-
-	}
-
-	private void EnablePlus()
-	{
-
-	}
-
-	private void EnableMinus()
-	{
-
+		_plusEffects.SetActive(plus);
+		_minusEffects.SetActive(minus);
 	}
 }

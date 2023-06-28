@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class ChargableObject : MonoBehaviour
 {
     public PowerTypeUnityEvent OnPowerTypeChanged = new PowerTypeUnityEvent();
-    public PowerType Power { get; private set; }
+    public PowerType Power { get; protected set; }
 
     [Header("Charge Settings")]
     [field: SerializeField] public PowerType CanBeChargedBy;
@@ -36,7 +36,9 @@ public abstract class ChargableObject : MonoBehaviour
             Power = powerType;
         }
 
-        if (Power == PowerType.No) SetNoPower();
+		OnPowerTypeChanged.Invoke(Power);
+
+		if (Power == PowerType.No) SetNoPower();
         else if (Power == PowerType.Plus) SetPlus();
         else if (Power == PowerType.Minus) SetMinus();
     }
