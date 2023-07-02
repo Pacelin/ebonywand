@@ -3,8 +3,12 @@ using Zenject;
 
 public class CameraInstaller : MonoInstaller
 {
-    public override void InstallBindings()
+    [SerializeField] private Camera _camera;
+    [SerializeField] private CameraController _controller;
+
+	public override void InstallBindings()
     {
-        Container.BindInstance(Camera.main).AsSingle().NonLazy();
+        Container.BindInstance(_camera).AsSingle().NonLazy();
+        Container.BindInstance(_controller).AsSingle().NonLazy();
     }
 }

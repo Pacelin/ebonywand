@@ -3,6 +3,7 @@ using UnityEngine;
 public class FrictionEffects : MonoBehaviour
 {
 	[SerializeField] private ParticleSystem[] _particles;
+	[SerializeField] private TrailRenderer _trail;
 	[SerializeField] private float _distanceMultiplier = 1;
 	[SerializeField] private float _minScale = 0;
 	[SerializeField] private float _maxScale = 1;
@@ -28,6 +29,7 @@ public class FrictionEffects : MonoBehaviour
 		if (_isPlay) return;
 
 		_isPlay = true;
+		_trail.emitting = true;
 		foreach (var particle in _particles)
 			particle.Play();
 	}
@@ -37,6 +39,7 @@ public class FrictionEffects : MonoBehaviour
 		if (!_isPlay) return;
 		
 		_isPlay = false;
+		_trail.emitting = false;
 		foreach (var particle in _particles)
 			particle.Stop();
 	}
