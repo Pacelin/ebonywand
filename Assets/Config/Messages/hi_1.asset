@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0675b5834c1eee4ca347ae8d52066d8, type: 3}
-  m_Name: test_message
+  m_Name: hi_1
   m_EditorClassIdentifier: 
-  _authorIcon: {fileID: 21300000, guid: 17fa84703485d314b8d6b5216987d4b1, type: 3}
-  _messageText: "\u042D\u0442\u043E \u0442\u0435\u0441\u0442\u043E\u0432\u043E\u0435
-    \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0442\u0435\u0431\u044F
-    :)"
+  _authorIcon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+  _messageText: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435
+    \u0443\u0441\u043F\u0435\u0448\u043D\u043E...\n\u041C\u043E\u0434\u0435\u043B\u044C
+    STAT_1C, \u0441 \u043F\u0440\u043E\u0431\u0443\u0436\u0434\u0435\u043D\u0438\u0435\u043C!"

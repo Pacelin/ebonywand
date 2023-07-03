@@ -17,6 +17,8 @@ public class ChatUI : MonoBehaviour
 	[SerializeField] private string _openTriggerName;
 	[SerializeField] private string _closeTriggerName;
 	[SerializeField] private string _newMessageTriggerName;
+	[Space]
+	[SerializeField] private float _messagesDelay;
 
 	[Inject] private Chat _chat;
 
@@ -65,7 +67,7 @@ public class ChatUI : MonoBehaviour
 			_opened = true;
 
 			yield return new WaitWhile(() => _opened);
-			yield return new WaitForSeconds(0.3f);
+			yield return new WaitForSeconds(_messagesDelay);
 		}
 		_isShowing = false;
 	}
