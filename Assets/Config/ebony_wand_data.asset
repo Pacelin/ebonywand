@@ -15,6 +15,6 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 2f9c6ba25d71fff41af6bdc14cbc79d0, type: 3}
   <PowerCapacity>k__BackingField: 100
   <PowerBurstMinimum>k__BackingField: 70
-  <PowerConsumption>k__BackingField: 6
+  <PowerConsumption>k__BackingField: 5
   <PowerProduce>k__BackingField: 1
   <PowerType>k__BackingField: 2

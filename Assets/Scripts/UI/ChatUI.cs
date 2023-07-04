@@ -24,6 +24,7 @@ public class ChatUI : MonoBehaviour
 
 	private bool _opened;
 	private bool _isShowing;
+	private bool _newMessagesRecieved;
 
 	private void OnEnable()
 	{
@@ -70,11 +71,13 @@ public class ChatUI : MonoBehaviour
 			yield return new WaitForSeconds(_messagesDelay);
 		}
 		_isShowing = false;
+		_newMessagesRecieved = false;
 	}
 
 	private void Chat_OnNewMessage(ChatMessage message)
 	{
-		if (_opened) return;
+		if (_opened || _newMessagesRecieved) return;
 		_animator.SetTrigger(_newMessageTriggerName);
+		_newMessagesRecieved = true;
 	}
 }

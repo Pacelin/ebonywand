@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Chat
 {
@@ -33,6 +34,7 @@ public class Chat
 			throw new Exception("No Messages");
 
 		HaveMessages = _messages.Count > 1;
+		Debug.Log(_messages.Count);
 
 		return _messages.Dequeue();
 	}

@@ -18,6 +18,11 @@ public class Wand
     public void ConsumpPower(float deltaTime) =>
         SetPower(Power - Data.PowerConsumption * deltaTime);
 
+    public void SetFullPower() =>
+        SetPower(Data.PowerCapacity);
+    public void ResetPower() =>
+        SetPower(0);
+
 
     public void Burst()
     {
